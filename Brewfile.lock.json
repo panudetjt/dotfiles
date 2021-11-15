@@ -6,6 +6,18 @@
         "options": {
           "full_name": "flutter"
         }
+      },
+      "android-studio": {
+        "version": "2020.3.1.25",
+        "options": {
+          "full_name": "android-studio"
+        }
+      },
+      "google-chrome": {
+        "version": "95.0.4638.69",
+        "options": {
+          "full_name": "google-chrome"
+        }
       }
     }
   },
