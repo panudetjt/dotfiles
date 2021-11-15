@@ -1,0 +1,24 @@
+{
+  "entries": {
+    "cask": {
+      "flutter": {
+        "version": "2.5.3",
+        "options": {
+          "full_name": "flutter"
+        }
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "monterey": {
+        "HOMEBREW_VERSION": "3.3.3",
+        "HOMEBREW_PREFIX": "/opt/homebrew",
+        "Homebrew/homebrew-core": "cf257bba96fc3ba0fe8e6bb20052b5a27a856208",
+        "CLT": "13.1.0.0.1.1633545042",
+        "Xcode": "13.1",
+        "macOS": "12.0.1"
+      }
+    }
+  }
+}
