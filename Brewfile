@@ -4,6 +4,7 @@ brew "exa"
 brew "bat"
 brew "tldr"
 brew "volta"
+brew "scrcpy"
 
 cask "visual-studio-code"
 cask "android-studio"
