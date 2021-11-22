@@ -14,15 +14,27 @@
         }
       },
       "google-chrome": {
-        "version": "96.0.4664.45",
+        "version": "96.0.4664.55",
         "options": {
           "full_name": "google-chrome"
         }
       },
       "visual-studio-code": {
-        "version": "1.62.2",
+        "version": "1.62.3",
         "options": {
           "full_name": "visual-studio-code"
+        }
+      },
+      "adobe-creative-cloud": {
+        "version": "5.6.0.788",
+        "options": {
+          "full_name": "adobe-creative-cloud"
+        }
+      },
+      "discord": {
+        "version": "0.0.264",
+        "options": {
+          "full_name": "discord"
         }
       }
     },
@@ -283,7 +295,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.3.4",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "1ee9621bd3c9094bcc3a0d4ee653a87dbbe7abb2",
+        "Homebrew/homebrew-core": "dd9618634bda1ca72dec3a0dfe87be8ff0ce90b0",
         "CLT": "13.1.0.0.1.1633545042",
         "Xcode": "13.1",
         "macOS": "12.0.1"
