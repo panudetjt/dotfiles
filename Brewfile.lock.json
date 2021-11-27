@@ -36,6 +36,18 @@
         "options": {
           "full_name": "discord"
         }
+      },
+      "rancher": {
+        "version": "0.6.1",
+        "options": {
+          "full_name": "rancher"
+        }
+      },
+      "docker": {
+        "version": "4.2.0,70708",
+        "options": {
+          "full_name": "docker"
+        }
       }
     },
     "brew": {
@@ -293,9 +305,9 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.3.4",
+        "HOMEBREW_VERSION": "3.3.5",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "dd9618634bda1ca72dec3a0dfe87be8ff0ce90b0",
+        "Homebrew/homebrew-core": "707a67dc7f29d410f58f542755ee9f2b9f5ff690",
         "CLT": "13.1.0.0.1.1633545042",
         "Xcode": "13.1",
         "macOS": "12.0.1"

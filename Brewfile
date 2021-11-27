@@ -12,3 +12,5 @@ cask "google-chrome"
 cask "flutter"
 cask "adobe-creative-cloud"
 cask "discord"
+cask "docker"
+
