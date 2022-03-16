@@ -6,7 +6,7 @@ export ANDROID_SDK_ROOT="/Users/jame/Library/Android/sdk"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 
 php() {
-	nerdctl run --rm \
+	docker run --rm \
 		-v "$(pwd)":/opt \
 		-w /opt \
 		laravelsail/php81-composer:latest \
