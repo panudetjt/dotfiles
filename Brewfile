@@ -6,6 +6,7 @@ brew "tldr"
 brew "volta"
 brew "scrcpy"
 brew "deno"
+brew "jq"
 
 cask "visual-studio-code"
 cask "android-studio"
