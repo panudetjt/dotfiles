@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+# install brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew bundle install
+
 ln -s $(pwd)/.gitconfig ~/.gitconfig
 ln -s $(pwd)/.zshrc ~/.zshrc
 ln -s $(pwd)/.zprofile ~/.zprofile
