@@ -1,9 +1,11 @@
-
+# Fig pre block. Keep at the top of this file.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/
 export ANDROID_SDK_ROOT="/Users/jame/Library/Android/sdk"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
+
+export PATH="$PATH:/Users/$USER/fvm/default/bin"
 
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
@@ -41,3 +43,7 @@ artserve() {
                 laravelsail/php81-composer:latest \
                 bash -c "php artisan serve --host 0.0.0.0";
 }
+
+# Docker remove dangling images
+alias drmid='docker rmi $(docker images -f "dangling=true" -q)'
+
