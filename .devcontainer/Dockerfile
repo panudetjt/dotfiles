@@ -1,4 +1,4 @@
-FROM --platform=amd64 amazonlinux:2
+FROM amazonlinux:2
 
 ## Install needed package and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
@@ -23,9 +23,6 @@ RUN yum -y update \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-## Install volta
-RUN su vscode -c "curl https://get.volta.sh | bash"
-
 # Install pyenv
 RUN su vscode -c "git clone https://github.com/pyenv/pyenv.git ~/.pyenv"
 
@@ -37,4 +34,7 @@ RUN su vscode -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/too
     && su vscode -c "ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme" \
     && su vscode -c "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" \
     && su vscode -c "git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+## Install volta
+RUN su vscode -c ". ~/.zshrc && curl https://get.volta.sh | bash && volta install node corepack && pnpm config set store-dir ~/.pnpm-store"
 
