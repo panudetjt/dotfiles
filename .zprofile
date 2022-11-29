@@ -47,3 +47,7 @@ artserve() {
 # Docker remove dangling images
 alias drmid='docker rmi $(docker images -f "dangling=true" -q)'
 
+
+# convert many image with https://github.com/libvips/libvips/issues/656
+# parallel vipsthumbnail x.png -s {} -o {}_x.jpg ::: 4096 1024 512 256 128
+
