@@ -116,4 +116,4 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # pnpm
 export PNPM_HOME="/Users/panudet/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+# pnpm endexport PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

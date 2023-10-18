@@ -1,9 +1,13 @@
 # Fig pre block. Keep at the top of this file.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/
-export ANDROID_SDK_ROOT="/Users/$USER/Library/Android/sdk"
-export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home/
+# export ANDROID_SDK_ROOT="/Users/$USER/Library/Android/sdk"
+# export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 
 export PATH="$PATH:/Users/$USER/fvm/default/bin"
 
