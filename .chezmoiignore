@@ -1,0 +1,15 @@
+{{ if ne .chezmoi.os "darwin" }}
+.zshrc
+.zprofile
+{{ end }}
+README.md
+LICENSE
+Brewfile
+Brewfile.lock.json
+Dockerfile
+.devcontainer
+iterm2
+bin
+tree.txt
+install
+scripts

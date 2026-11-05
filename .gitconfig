@@ -1,9 +1,0 @@
-[user]
-	name = Panudet Tammwongsa
-	email = 3482285+panudetjt@users.noreply.github.com
-[init]
-	defaultBranch = main
-[core]
-	pager = bat -p
-[credential]
-	UseHttpPath = true

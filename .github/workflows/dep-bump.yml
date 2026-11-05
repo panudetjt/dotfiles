@@ -1,0 +1,44 @@
+name: dependency bump PR
+on:
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: "chezmoi | mise"
+        required: true
+      version:
+        description: "เวอร์ชันใหม่ (ไม่ต้องมี v เช่น 2.74.1)"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    env:
+      TOOL: ${{ github.event.inputs.tool }}
+      VER: ${{ github.event.inputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: bump pins (recompute hash + patch files)
+        env:
+          SKIP_DOCKER: "1"
+        run: bash scripts/dep-bump.sh "$TOOL" "$VER"
+      - name: container zero-trust chain test
+        run: bash scripts/dep-chain-test.sh
+      - name: open PR
+        run: |
+          BR="dep/$TOOL-v$VER"
+          git checkout -b "$BR"
+          git config user.name "dep-bump bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "dep: bump $TOOL → v$VER (hash recomputed from release, chain-tested in container)"
+          git push origin "$BR"
+          gh pr create \
+            --title "dep: bump $TOOL → v$VER" \
+            --body-file .dep-bump-pr-body.md \
+            --base main --head "$BR"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

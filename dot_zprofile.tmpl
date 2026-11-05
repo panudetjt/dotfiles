@@ -1,3 +1,4 @@
+{{ if eq .chezmoi.os "darwin" -}}
 # Fig pre block. Keep at the top of this file.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -9,7 +10,7 @@ export NVM_DIR="$HOME/.nvm"
 # export ANDROID_SDK_ROOT="/Users/$USER/Library/Android/sdk"
 # export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 
-export PATH="$PATH:/Users/$USER/fvm/default/bin"
+export PATH="$PATH:$HOME/fvm/default/bin"
 
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
@@ -55,3 +56,4 @@ alias drmid='docker rmi $(docker images -f "dangling=true" -q)'
 # convert many image with https://github.com/libvips/libvips/issues/656
 # parallel noglob vipsthumbnail x.png -s {} -o {}_x.jpg ::: 4096 1024 512 256 128
 
+{{- end }}

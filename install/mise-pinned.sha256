@@ -1,0 +1,9 @@
+# pinned-version: 2026.10.15
+# mise v2026.10.15 — บันทึกเทียบ 6 พ.ย. 2026 · hash จาก 2 แหล่งอิสระที่ตรงกัน:
+# ① binary ที่เครื่อง WSL2 หลักใช้งานอยู่จริงทุกวัน (linux-x64 — เฝ้าพฤติกรรมมาหลายสัปดาห์)
+# ② digest ของ asset จาก GitHub API (release v2026.10.15 publish 2026-10-19)
+# อีกชั้นของ upstream: release มี SHASUMS256.txt + .minisig (minisign) + .asc (GPG)
+# ตรวจตอนใช้: run_once_install-tools.sh เทียบ hash ก่อนติดตั้งเสมอ — ไม่ผ่าน = หยุด
+e3b186d4c70627f27037be615becaf4acfb30e41fb6a1819486717dc94e4e2a9  mise-v2026.10.15-linux-x64
+3abbaac305a465ef038eb4ea07b961c037a8b639108005e43f8e2c00a8f67c11  mise-v2026.10.15-linux-arm64
+826c4833fa7437a63f6027b86bc10c8b61b1163dc793c03ecde92f68ad167890  mise-v2026.10.15-macos-arm64

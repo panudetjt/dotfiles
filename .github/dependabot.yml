@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # Dependabot ช่วงเดียวที่เข้ากับ repo นี้: เวอร์ชัน actions ใน .github/workflows
+  # (pins ของ chezmoi/mise เป็น hash+version ของเราเอง — จัดโดย scripts/dep-check.sh + dep-bump.sh ดู workflows)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
