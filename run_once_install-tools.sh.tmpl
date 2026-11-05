@@ -22,9 +22,11 @@ if ! command -v mise >/dev/null 2>&1 && [ ! -x "$HOME/.local/bin/mise" ]; then
     echo "arch ไม่รองรับ: {{ .chezmoi.arch }}" >&2
     exit 1
 {{ end }}
+    # fallback: ใช้ wget ถ้าไม่มี curl (alpine มาพร้อม busybox wget แต่ไม่มี curl)
+    dl() { if command -v curl >/dev/null 2>&1; then curl -fsSL -o "$2" "$1"; else wget -qO "$2" "$1"; fi; }
     tmp="$(mktemp -d)"
     trap 'rm -rf "$tmp"' EXIT
-    curl -fsSL -o "$tmp/mise" "https://github.com/jdx/mise/releases/download/v2026.10.15/$asset"
+    dl "https://github.com/jdx/mise/releases/download/v2026.10.15/$asset" "$tmp/mise"
 {{ if eq .chezmoi.os "darwin" }}
     actual="$(shasum -a 256 "$tmp/mise" | cut -d' ' -f1)"
 {{ else }}
