@@ -20,7 +20,7 @@ jobs:
       TOOL: ${{ github.event.inputs.tool }}
       VER: ${{ github.event.inputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: bump pins (recompute hash + patch files)
         env:
           SKIP_DOCKER: "1"
