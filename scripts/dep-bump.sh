@@ -31,7 +31,7 @@ for a in r["assets"]: print(a["name"]+"\t"+(a.get("digest") or ""))' > "$tmp/ass
 # 2) โหลดไบนารีทุกแพลตฟอร์มที่ pin + sha256 เทียบ digest
 case "$TOOL" in
   chezmoi) PLATS=(linux-amd64 darwin-arm64); prefix="" ;;
-  mise)    PLATS=(linux-x64 linux-arm64 macos-arm64); prefix="mise-v$VER-" ;;
+  mise)    PLATS=(linux-x64 linux-arm64 macos-arm64 linux-x64-musl linux-arm64-musl); prefix="mise-v$VER-" ;;
 esac
 declare -A HASHES
 for p in "${PLATS[@]}"; do
@@ -85,7 +85,7 @@ else:
     t = open(p).read()
     t = t.replace(f"mise-v{old}-", f"mise-v{ver}-").replace(f"download/v{old}/", f"download/v{ver}/")
     for plat, h in plats:
-        t2 = re.sub(rf'(asset="mise-v{re.escape(ver)}-{plat}"\n    expect=")[0-9a-f]{{64}}(")',
+        t2 = re.sub(rf'(asset="mise-v{re.escape(ver)}-{plat}"\n\s+expect=")[0-9a-f]{{64}}(")',
                     rf'\g<1>{h}\g<2>', t)
         assert t2 != t, f"patch hash ไม่เข้า: {plat}"
         t = t2

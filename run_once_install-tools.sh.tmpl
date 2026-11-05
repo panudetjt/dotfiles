@@ -13,11 +13,22 @@ if ! command -v mise >/dev/null 2>&1 && [ ! -x "$HOME/.local/bin/mise" ]; then
     exit 1
 {{ end }}
 {{ else if eq .chezmoi.arch "amd64" }}
-    asset="mise-v2026.10.15-linux-x64"
-    expect="e3b186d4c70627f27037be615becaf4acfb30e41fb6a1819486717dc94e4e2a9"
+    # libc-aware: musl (alpine) ใช้ asset -musl — ไบนารี glibc บน musl = "not found" ทั้งที่ไฟล์อยู่
+    if [ -e /lib/ld-musl-x86_64.so.1 ] || ldd --version 2>/dev/null | grep -q musl; then
+        asset="mise-v2026.10.15-linux-x64-musl"
+        expect="5daa5f70c1588bb27ffecb275b46dbafcab0f6fc93a893138ba4d8cae6074b60"
+    else
+        asset="mise-v2026.10.15-linux-x64"
+        expect="e3b186d4c70627f27037be615becaf4acfb30e41fb6a1819486717dc94e4e2a9"
+    fi
 {{ else if eq .chezmoi.arch "arm64" }}
-    asset="mise-v2026.10.15-linux-arm64"
-    expect="3abbaac305a465ef038eb4ea07b961c037a8b639108005e43f8e2c00a8f67c11"
+    if [ -e /lib/ld-musl-aarch64.so.1 ] || ldd --version 2>/dev/null | grep -q musl; then
+        asset="mise-v2026.10.15-linux-arm64-musl"
+        expect="823b94a7425c4781d475357cb2064bfafddc13cf66b7f2927b65d96f49bbe73c"
+    else
+        asset="mise-v2026.10.15-linux-arm64"
+        expect="3abbaac305a465ef038eb4ea07b961c037a8b639108005e43f8e2c00a8f67c11"
+    fi
 {{ else }}
     echo "arch ไม่รองรับ: {{ .chezmoi.arch }}" >&2
     exit 1
