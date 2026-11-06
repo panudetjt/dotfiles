@@ -33,8 +33,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.config/vite-plus/env"
+# Vite+ bin (guarded — เครื่องที่ไม่ติดตั้งไม่ต้อง error ทุก login)
+[ -f "$HOME/.config/vite-plus/env" ] && . "$HOME/.config/vite-plus/env"
 
 
 # (Antigravity installer line ตัด — hardcode /home/jame และซ้ำกับ ~/.local/bin block ข้างบน)
