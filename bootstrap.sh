@@ -13,6 +13,15 @@ set -eu
 REPO="https://github.com/panudetjt/dotfiles.git"
 TARGET="${DOTFILES_DIR:-$HOME/src/dotfiles}"
 
+# pass-through tier flags: curl … | sh -s -- --mobile --rust  (scripted — ข้าม wizard prompt)
+TIER_ARGS=""
+for arg in "$@"; do
+    case "$arg" in
+        --mobile|--rust|--all|--yes) TIER_ARGS="$TIER_ARGS $arg" ;;
+        *) echo "flag ไม่รู้จัก: $arg (ใช้ --mobile --rust --all --yes)" >&2; exit 2 ;;
+    esac
+done
+
 say() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m==>\033[0m %s\n' "$*"; }
 
@@ -57,14 +66,26 @@ if ! mise dot apply; then
     warn "ที่เหลือทั้งชุดติดตั้งไปแล้ว — แก้ conflict แล้ว apply เพิ่มได้ภายหลัง"
 fi
 
-# ---------- 4) wizard เลือก tier (mobile/rust) — interactive เมื่อมี terminal ----------
-say "shell ใหม่จะได้ tools ทันที (mise shims อยู่ใน ~/.profile + activate ใน common.sh)"
-if [ -t 0 ] || [ -t 1 ]; then
-    say "wizard: เลือก tier ที่เครื่องนี้ต้องใช้ (base node/pnpm/bun ติดตั้งไปแล้ว)"
+# ---------- 4) เลือก tier (mobile/rust) — ถามใน bootstrap เลยเมื่อมี terminal, หรือตาม flags ----------
+say "เลือก tier ที่เครื่องนี้ต้องใช้ (base node/pnpm/bun ติดตั้งไปแล้ว — mobile/rust เป็น opt-in)"
+if [ -n "$TIER_ARGS" ]; then
+    say "tier จาก flags:$TIER_ARGS"
+    sh setup.sh $TIER_ARGS --yes < /dev/tty 2>/dev/null || sh setup.sh $TIER_ARGS --yes
+elif [ -t 0 ] || [ -t 1 ]; then
     sh setup.sh < /dev/tty
 else
-    warn "(ไม่มี terminal แบบ interactive — ข้าม wizard: รัน ./setup.sh เองเมื่อพร้อมเลือก tier)"
+    warn "(ไม่มี terminal แบบ interactive — ข้าม wizard: tier ตามที่ตั้งไว้ใน config.local.toml · เพิ่มทีหลัง: ./setup.sh)"
+fi
+
+# ---------- 5) cleanup — เก็บกวาด state ให้เป๊ะจบ one command ----------
+say "cleanup: reshim (shims ตรง tier ที่เลือก) + prune (versions ที่ไม่มี config อ้าง)"
+mise reshim
+before="$(du -sm "$HOME/.local/share/mise/installs" 2>/dev/null | cut -f1 || echo 0)"
+mise prune --yes >/dev/null 2>&1 || true
+after="$(du -sm "$HOME/.local/share/mise/installs" 2>/dev/null | cut -f1 || echo 0)"
+if [ "$before" != "$after" ]; then
+    say "prune ปล่อยดิสก์: $((before - after)) MB (${before} → ${after} MB)"
 fi
 
 say "เสร็จ! เปิด terminal ใหม่ (หรือ: source ~/.bashrc) แล้วลอง: mise doctor · git config --global user.email"
-say "tier เพิ่มภายหลัง: cd $TARGET && ./setup.sh · แก้ config: แก้ใน repo → mise dot diff → mise dot apply"
+say "tier เพิ่ม/ถอดภายหลัง: cd $TARGET && ./setup.sh · แก้ config: แก้ใน repo → mise dot diff → mise dot apply"
