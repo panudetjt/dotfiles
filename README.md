@@ -24,6 +24,7 @@ mise dot status             # สถานะทุก entry
 mise dot unapply ~/.bashrc  # ถอย (ปฏิเสธถ้าไฟล์ถูกแก้เอง — ต้อง --force)
 mise dot add ~/.newfile     # ดูดไฟล์ใหม่เข้า repo
 mise outdated               # tools เก่าไหม → mise upgrade --bump
+# แก้พฤติกรรม shell = แก้ shell-common.sh ไฟล์เดียว → ทั้ง linux และ macOS เหมือนกัน
 ```
 
 ## โครง
@@ -32,8 +33,9 @@ mise outdated               # tools เก่าไหม → mise upgrade --bum
 |---|---|---|
 | `mise.toml` | — | **ประกาศ [dotfiles] ทั้งหมด** + [vars] |
 | `mise.linux.toml` / `mise.macos.toml` | — | platform files — entry ต่อ OS (`auto_env = true` ตั้งใน config/mise.toml) |
-| `bashrc` `profile` | `~/.bashrc` `~/.profile` (linux) | mode = copy |
-| `zshrc` `zprofile` | `~/.zshrc` `~/.zprofile` (macos) | macos-only ผ่าน platform file |
+| `shell-common.sh` | `~/.config/shell/common.sh` | **พฤติกรรมร่วมไฟล์เดียว (PATH/aliases/mise activate/daily)** — bash กับ zsh source ไฟล์เดียวกัน = เหมือนกันโดยโครงสร้าง |
+| `bashrc` | `~/.bashrc` (linux) | Ubuntu skeleton บาง ๆ + source common |
+| `zshrc` `zprofile` | `~/.zshrc` `~/.zprofile` (macos) | **preamble บาง ๆ + source common เดียวกับ linux** — stack เก่า (oh-my-zsh/nvm/volta) ตัดทิ้ง 6 พ.ย. 2026 (คืนได้จาก git history) |
 | `gitconfig.tera` | `~/.gitconfig` | mode = template (Tera — `os()`, `env.WSL_DISTRO_NAME`) |
 | `tmux.conf` `vimrc` | `~/.tmux.conf` `~/.vimrc` | mode = symlink |
 | `config/mise.toml` | `~/.config/mise/config.toml` | toolchain SSOT (+ auto_env) — mise เขียนไฟล์นี้ก่อนแล้วอ่านซ้ำในรอบเดียว |

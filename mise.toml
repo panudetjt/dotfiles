@@ -4,6 +4,7 @@ email = "3482285+panudetjt@users.noreply.github.com"
 
 [dotfiles]
 # เครื่องมือจัดการ dotfiles = mise เอง — ประกาศตรงนี้ อ่านเมื่อ trust แล้ว
+"~/.config/shell/common.sh" = { source = "shell-common.sh", mode = "copy" }
 "~/.bashrc" = { source = "bashrc", mode = "copy" }
 "~/.tmux.conf" = { source = "tmux.conf" }
 "~/.vimrc" = { source = "vimrc" }

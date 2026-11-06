@@ -72,42 +72,14 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# ls/grep colors + aliases → ย้ายไป ~/.config/shell/common.sh (ใช้ร่วมกับ zsh ฝั่ง macOS)
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# enable programmable completion features
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -115,56 +87,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export PATH=$HOME/.local/bin:$PATH
 
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Go
-export PATH="$PATH:/usr/local/go/bin"
-
-
-# alias claude-mem='bun "/home/jame/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
-
-alias claudez="claude --allow-dangerously-skip-permissions --settings ~/.claude/zai-settings.json"
-alias clauded="claude --allow-dangerously-skip-permissions"
-
-alias agyd="agy --dangerously-skip-permissions"
-
-
-[ -x "$HOME/.local/bin/mise" ] && eval "$(mise activate bash)"
-
-# Disable oh-my-openagent anonymous telemetry
-export OMO_SEND_ANONYMOUS_TELEMETRY=0
-export OMO_DISABLE_POSTHOG=1
-
-# Snap packages (aws-cli etc.) live in /snap/bin, which /etc/profile.d only
-# adds for login shells; interactive non-login shells (VS Code, tmux) miss it.
-case ":$PATH:" in
-  *":/snap/bin:"*) ;;
-  *) export PATH="$PATH:/snap/bin" ;;
-esac
-
-# >>> daily >>>
-# สร้างโดย /home/jame/work/sp/daily/scripts/install.sh — แก้ด้วยมือได้ แต่รันสคริปต์ซ้ำจะเขียนทับบล็อกนี้
-export DAILY_DIR="$HOME/work/sp/daily/wiki/config"
-export DAILY_WIKI="$HOME/work/sp/daily/wiki"
-# <<< daily <<<
-
-# Vite+ bin (https://viteplus.dev)
-[ -f "$HOME/.config/vite-plus/env" ] && . "$HOME/.config/vite-plus/env"
-
-
-# Added by Antigravity CLI installer
-export PATH="$HOME/.local/bin:$PATH"
-
-export CARGO_TARGET_DIR=/tmp/t-m2-20-target
+# พฤติกรรมที่เหลือทั้งหมด (PATH/aliases/mise activate/daily) อยู่ที่ common ไฟล์เดียว
+. "$HOME/.config/shell/common.sh"
