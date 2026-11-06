@@ -44,6 +44,21 @@ mise outdated               # tools เก่าไหม → mise upgrade --bum
 
 secrets: **repo นี้ยังไม่เก็บ secret** — mise มี age values ในตัว (experimental) + fnox/SOPS เมื่อจำเป็น — ห้าม commit รหัสเปล่า
 
+## Lazy install — ลงเท่าที่ใช้ (กันดิสก์บวม)
+
+**base มากับ dotfiles แล้ว** (เบา: node/pnpm/bun + configs) — ของหนักเป็น **opt-in ต่อเครื่อง**:
+
+```sh
+./setup.sh                  # interactive — ถามทีละชั้น
+./setup.sh --mobile         # java + ANDROID env (+ ถามโหลด Android SDK ~2-3 GB)
+./setup.sh --rust           # rust 1.99.1 (ใช้นอก project — thamdu/tham-libs pin เองอยู่แล้ว)
+./setup.sh --all            # ทุกชั้น
+```
+
+- wizard เขียน `~/.config/mise/config.local.toml` (ไฟล์ของเครื่องนั้น ไม่ commit) — ถอด tier = รันซ้ำเลือกน้อยลง
+- **project ที่มี mise.toml เอง (thamdu/tham-libs) mise install ให้เองเมื่อใช้ครั้งแรก** — เข้า dir แล้วเรียก tool ได้เลย ไม่ต้อง setup
+- งาน mobile เมื่อไหร่ค่อย `--mobile` — SDK ไม่ถูกโหลดล่วงหน้า · เครื่องที่ไม่ได้เลือกจะไม่มี java ใน PATH เลย
+
 ## Dependency updates (อัตโนมัติ)
 
 cron รายสัปดาห์ (`dep-check.yml`) → issue พร้อม release notes · ยกเวอร์ชัน = dispatch `dep-bump.yml` (recompute hash ×5 แพลตฟอร์ม → chain-test ใน container → PR) · tools = `mise outdated` → `mise upgrade --bump` · Dependabot = github-actions เท่านั้น
