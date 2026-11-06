@@ -1,11 +1,9 @@
-# pinned-version: 2026.10.15
-# mise v2026.10.15 — บันทึกเทียบ 6 พ.ย. 2026 · hash จาก 2 แหล่งอิสระที่ตรงกัน:
-# ① binary ที่เครื่อง WSL2 หลักใช้งานอยู่จริงทุกวัน (linux-x64 — เฝ้าพฤติกรรมมาหลายสัปดาห์)
-# ② digest ของ asset จาก GitHub API (release v2026.10.15 publish 2026-10-19)
-# อีกชั้นของ upstream: release มี SHASUMS256.txt + .minisig (minisign) + .asc (GPG)
-# ตรวจตอนใช้: run_once_install-tools.sh เทียบ hash ก่อนติดตั้งเสมอ — ไม่ผ่าน = หยุด
-e3b186d4c70627f27037be615becaf4acfb30e41fb6a1819486717dc94e4e2a9  mise-v2026.10.15-linux-x64
-3abbaac305a465ef038eb4ea07b961c037a8b639108005e43f8e2c00a8f67c11  mise-v2026.10.15-linux-arm64
-826c4833fa7437a63f6027b86bc10c8b61b1163dc793c03ecde92f68ad167890  mise-v2026.10.15-macos-arm64
-5daa5f70c1588bb27ffecb275b46dbafcab0f6fc93a893138ba4d8cae6074b60  mise-v2026.10.15-linux-x64-musl
-823b94a7425c4781d475357cb2064bfafddc13cf66b7f2927b65d96f49bbe73c  mise-v2026.10.15-linux-arm64-musl
+# pinned-version: 2026.11.2
+# mise v2026.11.2 — bump โดย scripts/dep-bump.sh เมื่อ 2026-11-06 (owner รีวิว PR ก่อน merge)
+# ตรวจตอน bump (CI): ไฟล์ที่ดาวน์โหลด = API digest ทุกแพลตฟอร์ม — receipts ใน PR body
+# กติกา repo: hash ชุดนี้ต้องผ่านการ "ใช้จริงอย่างน้อย 1 เครื่อง" ก่อนถือว่า anchor เต็ม
+62cad463c1413f05398ca339168a8f655120b6f0b0b8adce3bc6758bafaf0602  mise-v2026.11.2-linux-x64
+18bf3ac02033c2a50b772b411e35528cd1888386b4316895fcae626db6ad96f3  mise-v2026.11.2-linux-arm64
+90684d13d9125cf207c45b19dbdbf19baf8d5d0e3e10109f236b1b4d027416c0  mise-v2026.11.2-macos-arm64
+fa4f10af83e7131854ceecdf909fc4e4717c8b4d4eb921cf38451d61f118d267  mise-v2026.11.2-linux-x64-musl
+f9036b9cd99f9ca6df130b60bb457d3eda7fbc09d8c0242dc4d819f4410a4b91  mise-v2026.11.2-linux-arm64-musl

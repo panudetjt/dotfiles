@@ -1,6 +1,6 @@
 [user]
-	name = {{ vars.name | quote }}
-	email = {{ vars.email | quote }}
+	name = {{ vars.name }}
+	email = {{ vars.email }}
 [init]
 	defaultBranch = main
 [core]

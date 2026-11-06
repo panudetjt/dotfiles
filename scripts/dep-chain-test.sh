@@ -7,7 +7,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MISE_V="$(grep -oE '^# pinned-version: [0-9.]+' "$ROOT/install/mise-pinned.sha256" | grep -oE '[0-9.]+' | head -1)"
-MISE_H="$(awk '$2=="mise-v"*-linux-x64 && $0 !~ /musl/{print $1}' "$ROOT/install/mise-pinned.sha256" | head -1)"
+MISE_H="$(awk '$2 ~ /^mise-v[0-9.]+-linux-x64$/ {print $1}' "$ROOT/install/mise-pinned.sha256" | head -1)"
 [ -n "$MISE_V" ] && [ -n "$MISE_H" ] || { echo "อ่าน pin ไม่ครบ" >&2; exit 1; }
 
 docker run -i --rm -v "$ROOT:/src:ro" ubuntu:24.04 bash -s <<REMOTE

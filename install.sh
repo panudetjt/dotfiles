@@ -3,20 +3,20 @@
 # แล้วเทียบ sha256 กับ install/mise-pinned.sha256 — ไม่ผ่าน = หยุด — ไม่มี curl|sh
 # รันจาก root ของ repo นี้: ./install.sh
 set -eu
-VER=2026.10.15
+VER=2026.11.2
 case "$(uname -s)" in
     Darwin)
         [ "$(uname -m)" = arm64 ] || { echo "mise pin ไม่มี darwin-x64 — เพิ่มใน install/mise-pinned.sha256 ก่อน" >&2; exit 1; }
         asset="mise-v$VER-macos-arm64"
-        expect="826c4833fa7437a63f6027b86bc10c8b61b1163dc793c03ecde92f68ad167890"
+        expect="90684d13d9125cf207c45b19dbdbf19baf8d5d0e3e10109f236b1b4d027416c0"
         ;;
     Linux)
         if [ -e /lib/ld-musl-x86_64.so.1 ] || ldd --version 2>/dev/null | grep -q musl; then
             asset="mise-v$VER-linux-x64-musl"
-            expect="5daa5f70c1588bb27ffecb275b46dbafcab0f6fc93a893138ba4d8cae6074b60"
+            expect="fa4f10af83e7131854ceecdf909fc4e4717c8b4d4eb921cf38451d61f118d267"
         else
             asset="mise-v$VER-linux-x64"
-            expect="e3b186d4c70627f27037be615becaf4acfb30e41fb6a1819486717dc94e4e2a9"
+            expect="62cad463c1413f05398ca339168a8f655120b6f0b0b8adce3bc6758bafaf0602"
         fi
         ;;
     *) echo "OS ไม่รองรับ: $(uname -s)" >&2; exit 1 ;;

@@ -66,7 +66,7 @@ t2 = t.replace(f"VER={old}", f"VER={ver}", 1)
 assert t2 != t, "install.sh VER ไม่เจอ"
 t = t2
 for plat, h in (("macos-arm64",hma), ("linux-x64-musl",hxm), ("linux-x64",hx)):
-    t2 = re.sub(rf'(asset="mise-v{re.escape(ver)}-{plat}"\n\s+expect=")[0-9a-f]{{64}}(")',
+    t2 = re.sub(rf'(asset="[^"]*-{plat}"\n\s+expect=")[0-9a-f]{{64}}(")',
                 rf'\g<1>{h}\g<2>', t)
     assert t2 != t, f"patch hash ไม่เข้า: {plat}"
     t = t2
