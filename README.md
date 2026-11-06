@@ -38,8 +38,10 @@ mise outdated               # tools เก่าไหม → mise upgrade --bum
 | `zshrc` `zprofile` | `~/.zshrc` `~/.zprofile` (macos) | **preamble บาง ๆ + source common เดียวกับ linux** — stack เก่า (oh-my-zsh/nvm/volta) ตัดทิ้ง 6 พ.ย. 2026 (คืนได้จาก git history) |
 | `gitconfig.tera` | `~/.gitconfig` | mode = template (Tera — `os()`, `env.WSL_DISTRO_NAME`) |
 | `tmux.conf` `vimrc` | `~/.tmux.conf` `~/.vimrc` | mode = symlink |
-| `config/mise.toml` | `~/.config/mise/config.toml` | toolchain SSOT (+ auto_env) — mise เขียนไฟล์นี้ก่อนแล้วอ่านซ้ำในรอบเดียว |
+| `config/mise.toml` | `~/.config/mise/config.toml` | toolchain SSOT (base tools) — mise เขียนไฟล์นี้ก่อนแล้วอ่านซ้ำในรอบเดียว |
+| `.miserc.toml` | `~/.config/mise/.miserc.toml` | `auto_env = true` — **discovery setting ต้องอยู่ไฟล์นี้** (ใน mise.toml `[settings]` ไม่มีผล — docs §platform environments) |
 | `install.sh` + `install/mise-pinned.sha256` | — | zero-trust mise installer (5 แพลตฟอร์ม pin) |
+| `setup.sh` | — | **lazy install wizard** — เลือก tier ต่อเครื่อง (ดูหัวข้อ Lazy install) |
 | `scripts/dep-*.sh` | — | dependency automation (ดู workflows) |
 
 secrets: **repo นี้ยังไม่เก็บ secret** — mise มี age values ในตัว (experimental) + fnox/SOPS เมื่อจำเป็น — ห้าม commit รหัสเปล่า

@@ -8,6 +8,13 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# mise shims — login/non-interactive shells ต้องมี tools ด้วย (interactive ได้เพิ่มจาก
+# mise activate ใน common.sh — แต่ .bashrc early-return ก่อนถึง common เมื่อ non-interactive)
+case ":$PATH:" in
+  *":$HOME/.local/share/mise/shims:"*) ;;
+  *) [ -d "$HOME/.local/share/mise/shims" ] && export PATH="$HOME/.local/share/mise/shims:$PATH" ;;
+esac
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -30,5 +37,4 @@ fi
 . "$HOME/.config/vite-plus/env"
 
 
-# Added by Antigravity CLI installer
-export PATH="/home/jame/.local/bin:$PATH"
+# (Antigravity installer line ตัด — hardcode /home/jame และซ้ำกับ ~/.local/bin block ข้างบน)

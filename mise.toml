@@ -11,3 +11,4 @@ email = "3482285+panudetjt@users.noreply.github.com"
 "~/.gitconfig" = { source = "gitconfig.tera", mode = "template" }
 # deploy mise config ของตัวเอง — mise dot apply เขียนไฟล์นี้ก่อนและอ่านซ้ำในรอบเดียว
 "~/.config/mise/config.toml" = { source = "config/mise.toml", mode = "copy" }
+"~/.config/mise/.miserc.toml" = { source = ".miserc.toml", mode = "copy" }
