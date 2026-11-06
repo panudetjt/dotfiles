@@ -30,13 +30,16 @@ esac
 # ls/grep colors — ls ต่าง OS (GNU --color vs BSD -G) ที่เหลือเหมือนกัน
 case "$(uname -s)" in
     Darwin) alias ls='ls -G' ;;
-    *) [ -x /usr/bin/dircolors ] && eval "$(dircolors -b)" 2>/dev/null ; alias ls='ls --color=auto' ;;
+    *)
+        [ -x /usr/bin/dircolors ] && { test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"; } 2>/dev/null
+        alias ls='ls --color=auto'
+        ;;
 esac
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'
-alias fgrep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # claude / agent aliases
