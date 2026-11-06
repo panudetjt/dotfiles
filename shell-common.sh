@@ -4,7 +4,13 @@
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# pnpm
+# pnpm / bun — สองชั้นที่ต่างกัน (จดกันสงสัย 6 พ.ย. 2026):
+# ① ตัว tool pnpm/bun = mise จัด (shims ชนะเสมอ — `type -a pnpm` อันแรกคือ shims)
+# ② **global packages ที่ tool ติดตั้งเอง** (`pnpm add -g` / `bun add -g`) = mise ไม่จัด — อยู่
+#    PNPM_HOME/bin (~/.local/share/pnpm/bin: agent-browser ฯลฯ) และ BUN_INSTALL/bin
+#    (~/.bun/bin: codex/ncu/bunx) — PATH บรรทัดล่างนี้จึงจำเป็น
+# PNPM_HOME ตั้งชัด = ยึด path แบบ linux (~/.local/share/pnpm) ทั้งสอง OS — ถ้าไม่ตั้ง macOS
+# จะ default ~/Library/pnpm (แยกจาก linux — ขัด "ยึด linux เป็นหลัก") · bun default ~/.bun เท่ากันอยู่แล้ว
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
