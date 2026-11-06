@@ -8,7 +8,16 @@
 curl -fsLS https://raw.githubusercontent.com/panudetjt/dotfiles/main/bootstrap.sh | sh
 ```
 
-bootstrap ทำครบ: clone repo → ติดตั้ง mise แบบ zero-trust (binary pin + sha256) → trust → dot apply → wizard เลือก tier (mobile/rust) · ไม่ใช้ sudo ทุกอย่างอยู่ใน $HOME · script สั้นอ่านก่อน pipe ได้ (`curl -fsLS <url เดียวกัน>`)
+bootstrap ทำครบ: clone repo → ติดตั้ง mise แบบ zero-trust (binary pin + sha256) → trust → dot apply → **wizard ถาม tier (mobile/rust) ใน bootstrap เลย** (บน terminal จริง — ผ่าน /dev/tty) → **cleanup: reshim + prune** รายงานดิสก์ที่ปล่อย · ไม่ใช้ sudo ทุกอย่างอยู่ใน $HOME · script สั้นอ่านก่อน pipe ได้ (`curl -fsLS <url เดียวกัน>`)
+
+**scripted (ไม่ถาม — เช่น ตั้งเครื่อง worker หลายเครื่อง):**
+
+```sh
+curl -fsLS https://raw.githubusercontent.com/panudetjt/dotfiles/main/bootstrap.sh | sh -s -- --rust
+curl -fsLS https://raw.githubusercontent.com/panudetjt/dotfiles/main/bootstrap.sh | sh -s -- --mobile --rust --yes
+```
+
+(flags เข้าถึง wizard ตรง: `--mobile` ติดตั้ง java+ANDROID env — SDK ใหญ่ยังถามยืนยันแยกตามปกติ)
 
 <details><summary>หรือแบบ manual 3 คำสั่ง (เห็นทุกขั้น)</summary>
 
