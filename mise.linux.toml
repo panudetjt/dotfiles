@@ -1,0 +1,3 @@
+# platform file — โหลดเมื่อ auto_env = true (ตั้งใน config/mise.toml)
+[dotfiles]
+"~/.profile" = { source = "profile", mode = "copy" }

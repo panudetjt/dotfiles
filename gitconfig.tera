@@ -1,13 +1,13 @@
 [user]
-	name = {{ .name | quote }}
-	email = {{ .email | quote }}
+	name = {{ vars.name | quote }}
+	email = {{ vars.email | quote }}
 [init]
 	defaultBranch = main
 [core]
 	editor = vim
-{{ if eq .chezmoi.os "darwin" -}}
+{% if os() == "macos" %}
 	pager = bat -p
-{{- end }}
+{% endif %}
 [credential]
 	helper = store
 	useHttpPath = true

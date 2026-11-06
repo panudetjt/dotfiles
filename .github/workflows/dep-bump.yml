@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       tool:
-        description: "chezmoi | mise"
+        description: "mise"
         required: true
       version:
-        description: "เวอร์ชันใหม่ (ไม่ต้องมี v เช่น 2.74.1)"
+        description: "เวอร์ชันใหม่ (ไม่ต้องมี v เช่น 2026.11.2)"
         required: true
 
 permissions:

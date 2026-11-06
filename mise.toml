@@ -1,0 +1,12 @@
+[vars]
+name = "panudetjt"
+email = "3482285+panudetjt@users.noreply.github.com"
+
+[dotfiles]
+# เครื่องมือจัดการ dotfiles = mise เอง — ประกาศตรงนี้ อ่านเมื่อ trust แล้ว
+"~/.bashrc" = { source = "bashrc", mode = "copy" }
+"~/.tmux.conf" = { source = "tmux.conf" }
+"~/.vimrc" = { source = "vimrc" }
+"~/.gitconfig" = { source = "gitconfig.tera", mode = "template" }
+# deploy mise config ของตัวเอง — mise dot apply เขียนไฟล์นี้ก่อนและอ่านซ้ำในรอบเดียว
+"~/.config/mise/config.toml" = { source = "config/mise.toml", mode = "copy" }

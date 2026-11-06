@@ -1,0 +1,4 @@
+# platform file — โหลดบน macOS (auto_env)
+[dotfiles]
+"~/.zshrc" = { source = "zshrc", mode = "copy" }
+"~/.zprofile" = { source = "zprofile", mode = "copy" }

@@ -1,4 +1,3 @@
-{{ if eq .chezmoi.os "darwin" -}}
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -118,4 +117,3 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm endexport PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-{{- end }}

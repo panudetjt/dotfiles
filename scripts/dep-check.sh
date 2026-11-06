@@ -34,15 +34,14 @@ check() { # <ชื่อ> <owner/repo> <pinfile>
 
 echo "# dependency check — $(date -u "+%F %H:%M UTC")"
 echo
-check chezmoi twpayne/chezmoi install/chezmoi-pinned.sha256
 check mise jdx/mise install/mise-pinned.sha256
 
 echo "### tools ใน mise (เวอร์ชัน pin อยู่ \`dot_config/mise/config.toml\`)"
 if command -v mise >/dev/null 2>&1; then
   # รันบน config จริงของเครื่อง (trust อยู่แล้ว) — ถ้าเครื่อง drift จาก repo จะถูกชี้ด้วย
   live="${MISE_CONFIG:-$HOME/.config/mise/config.toml}"
-  if [ -f "$live" ] && ! diff -q "$live" "$ROOT/dot_config/mise/config.toml" >/dev/null 2>&1; then
-    echo "- ⚠️ **config จริงของเครื่อง ≠ repo** (\`$live\` vs \`dot_config/mise/config.toml\`) — sync ก่อน: แก้ใน repo แล้ว apply หรือ \`chezmoi diff\`"
+  if [ -f "$live" ] && ! diff -q "$live" "$ROOT/config/mise.toml" >/dev/null 2>&1; then
+    echo "- ⚠️ **config จริงของเครื่อง ≠ repo** (\`$live\` vs \`config/mise.toml\`) — sync ก่อน: แก้ใน repo แล้ว \`mise dot apply\`"
   fi
   tmpd="$(mktemp -d)"; trap 'rm -rf "$tmpd"' EXIT
   if mise outdated > "$tmpd/outdated.txt" 2>/dev/null && [ -s "$tmpd/outdated.txt" ]; then

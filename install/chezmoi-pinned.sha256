@@ -1,7 +1,0 @@
-# pinned-version: 2.74.0
-# บันทึกเทียบเมื่อ 6 พ.ย. 2026 — hash มาจาก 2 แหล่งอิสระที่ตรงกัน:
-# ① API digest ของ asset ใน release v2.74.0 (จับไว้ใน wiki/provenance ของ second-brains)
-# ② sha256sum ของ binary ที่ mise(ubi) ติดตั้งบนเครื่อง WSL2 นี้และใช้งานอยู่จริง
-# ตรวจ: sha256sum -c install/chezmoi-pinned.sha256 (รันจาก root ของ repo นี้)
-442ebbe0152f423b302ce5c6d94ff005773e5d61455c45f4be00b3430ae396a2  chezmoi-linux-amd64
-9d4d7aeecb40b2616af766f88cf6ea45ed2b1fc0a9793df7b075b63847ae47f8  chezmoi-darwin-arm64
