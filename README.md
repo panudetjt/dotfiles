@@ -71,6 +71,40 @@ secrets: **repo นี้ยังไม่เก็บ secret** — mise มี
 - **project ที่มี mise.toml เอง (thamdu/tham-libs) mise install ให้เองเมื่อใช้ครั้งแรก** — เข้า dir แล้วเรียก tool ได้เลย ไม่ต้อง setup
 - งาน mobile เมื่อไหร่ค่อย `--mobile` — SDK ไม่ถูกโหลดล่วงหน้า · เครื่องที่ไม่ได้เลือกจะไม่มี java ใน PATH เลย
 
+### Mobile dev (Android) — `./setup.sh --mobile`
+
+**สิ่งที่ลง** (ถามก่อนทุกขั้นหนัก): ① **java openjdk-21.0.2** ผ่าน mise (~300 MB) ② ตั้ง `ANDROID_HOME=~/Android/Sdk` + PATH (platform-tools / emulator / cmdline-tools) ลง `config.local.toml` ③ **Android SDK** — ถามแยกอีกรอบเพราะใหญ่ ~2-3 GB: โหลด [cmdline-tools](https://developer.android.com/studio#command-line-tools-only) จาก dl.google.com → ยอมรับ license → ติดตั้ง `platform-tools` · `platforms;android-36` · `build-tools;36.0.0` · `emulator`
+
+```sh
+./setup.sh --mobile           # ถามทีละขั้น — SDK ข้ามได้ (env รออยู่ ค่อยรันซ้ำเอา SDK ทีหลัง)
+```
+
+**ตรวจว่าพร้อม:**
+
+```sh
+java -version                 # openjdk 21 (mise-managed)
+adb --version && sdkmanager --list_installed   # platform-tools + platforms;android-36 + build-tools 36.0.0
+```
+
+**สร้าง/รัน emulator** (WSL2 ต้องมี KVM — เช็ค: `ls /dev/kvm`):
+
+```sh
+avdmanager create avd -n mydevice -k "system-images;android-36;google_apis;x86_64" -d pixel_6
+# (system image ต้อง sdkmanager "system-images;android-36;google_apis;x86_64" เพิ่มก่อนรอบเดียว)
+emulator -avd mydevice        # เครื่องนี้เคย boot ~20 s ด้วย KVM
+```
+
+**ถอด (คืนดิสก์ ~3 GB):**
+
+```sh
+mise uninstall java           # ลบ java ทุกเวอร์ชันที่ mise จัด
+rm -rf ~/Android/Sdk ~/.android ~/.gradle
+cd ~/src/dotfiles && ./setup.sh   # รันซ้ำไม่เลือก mobile → config.local.toml ถูกเขียนทับถอด env
+mise reshim && mise prune --yes  # เก็บกวาด shim/store ที่ว่าง
+```
+
+หมายเหตุ: cmdline-tools zip ของ Google **ไม่มี checksum ทางการ** — ขั้นนี้จึงเป็น opt-in ถามก่อนเสมอ (ต่างจาก mise/ทุกอย่างผ่าน mise ที่ผ่าน sha256) · ทางเลือกยิงยาว: ติดตั้งผ่าน Android Studio แล้วชี้ `ANDROID_HOME` เองใน `config.local.toml` (setup.sh เขียน env ให้แล้ว แค่มี dir ก็พอ — รันซ้ำมันข้ามโหลดให้เอง)
+
 ## Dependency updates (อัตโนมัติ)
 
 cron รายสัปดาห์ (`dep-check.yml`) → issue พร้อม release notes · ยกเวอร์ชัน = dispatch `dep-bump.yml` (recompute hash ×5 แพลตฟอร์ม → chain-test ใน container → PR) · tools = `mise outdated` → `mise upgrade --bump` · Dependabot = github-actions เท่านั้น
