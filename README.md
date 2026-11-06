@@ -2,13 +2,23 @@
 
 **เครื่องมือเดียวจบ** — mise เป็นทั้ง toolchain SSOT และ dotfiles manager (mise-single-source บริสุทธิ์) · ครอบคลุมสอง OS: macOS + Linux/WSL2 (platform files `mise.macos.toml` / `mise.linux.toml` — WSL แยกเพิ่มด้วย `env.WSL_DISTRO_NAME` ใน template)
 
-## เครื่องใหม่ — 3 คำสั่ง
+## เครื่องใหม่ — คำสั่งเดียว (ต้องมี curl หรือ wget)
+
+```sh
+curl -fsLS https://raw.githubusercontent.com/panudetjt/dotfiles/main/bootstrap.sh | sh
+```
+
+bootstrap ทำครบ: clone repo → ติดตั้ง mise แบบ zero-trust (binary pin + sha256) → trust → dot apply → wizard เลือก tier (mobile/rust) · ไม่ใช้ sudo ทุกอย่างอยู่ใน $HOME · script สั้นอ่านก่อน pipe ได้ (`curl -fsLS <url เดียวกัน>`)
+
+<details><summary>หรือแบบ manual 3 คำสั่ง (เห็นทุกขั้น)</summary>
 
 ```sh
 git clone https://github.com/panudetjt/dotfiles.git ~/src/dotfiles && cd ~/src/dotfiles
 ./install.sh                       # ติดตั้ง mise แบบ zero-trust (โหลด binary เวอร์ชัน pin + เทียบ sha256 ก่อนติดตั้ง)
 mise trust && mise dot apply       # trust แล้ว deploy ทุกไฟล์ (มี --dry-run ให้ดูก่อน)
 ```
+
+</details>
 
 - `install.sh` — ไม่มี curl|sh ไม่มี installer script ปลอม: hash จาก 2 แหล่ง (binary ที่ใช้จริง × API digest) · fallback wget เอง · libc-aware (glibc/musl)
 - `mise dot apply` — แตะ**เฉพาะ** entry ที่ประกาศใน `mise.toml` ("Only declared paths are managed") · ดูก่อนเสมอ: `mise dot diff`
